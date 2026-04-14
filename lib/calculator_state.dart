@@ -1,13 +1,19 @@
 class CalculatorState {
-  String userInput;
-  String result;
+  final String userInput;
+  final String result;
 
-  CalculatorState({this.userInput = '', this.result = '0'});
+  CalculatorState({
+    required this.userInput,
+    required this.result,
+  });
 
-  // CalculatorState copyWith({String? userInput, String? result}) {
-  //   return CalculatorState(
-  //     userInput: userInput ?? this.userInput,
-  //     result: result ?? this.result,
-  //   );
-  // }
+  CalculatorState copyWith({
+    String? userInput,
+    String? result,
+  }) {
+    return CalculatorState(
+      userInput: userInput ?? this.userInput,
+      result: result ?? this.result,
+    );
+  }
 }
