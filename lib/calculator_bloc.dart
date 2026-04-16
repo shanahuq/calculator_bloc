@@ -24,13 +24,11 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
           userInput = '-$userInput';
         }
       }
-    }
-      else if (event.value == 'backspace') {
+    } else if (event.value == 'backspace') {
       if (userInput.isNotEmpty) {
         userInput = userInput.substring(0, userInput.length - 1);
       }
-    }
-     else {
+    } else {
       userInput += event.value;
     }
     emit(state.copyWith(userInput: userInput, result: result));
@@ -39,6 +37,17 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
   String _calculate(String input) {
     try {
       String finalInput = input.replaceAll('X', '*');
+      finalInput = finalInput.replaceAllMapped(
+        RegExp(r'(\d+(\.\d+)?)%(\d+(\.\d+)?)'),
+        (match) {
+          double first = double.parse(match[1]!);
+          double second = double.parse(match[3]!);
+
+          double result = (first * second) / 100;
+
+          return result.toString();
+        },
+      );
       Parser p = Parser();
       Expression exp = p.parse(finalInput);
       ContextModel cm = ContextModel();

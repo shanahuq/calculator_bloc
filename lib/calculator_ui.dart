@@ -71,7 +71,7 @@ class CalculatorPage extends StatelessWidget {
                           fontSize: 40.sp,
                         ),
                       ),
-                      SizedBox(height: 10.h),
+                      SizedBox(height: 5.h),
                       Text(
                         state.result,
                         style: TextStyle(
